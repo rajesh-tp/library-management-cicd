@@ -1,0 +1,152 @@
+﻿@model IEnumerable<Library.Models.Book>
+
+@{
+    ViewBag.Title = "List of Library Books";
+    Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>List of Library Books</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ISBN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BookTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PublicationYear)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Language)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CategoryId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BindingId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberOfCopiesActual)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberOfCopiesCurrent)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr id="row_@item.BookId">
+            <td>
+                @Html.DisplayFor(modelItem => item.ISBN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PublicationYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Language)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BindingId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfCopiesActual)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfCopiesCurrent)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.BookId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.BookId }) |
+                <a href="#" class="btn btn-info" onclick="DownloadBook(@item.BookId)"><i class="glyphicon glyphicon-download"></i> </a>
+                <a href="#" class="btn btn-danger" onclick="ConfirmDelete(@item.BookId)"><i class="glyphicon glyphicon-trash"></i> </a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+@*hidden field for storing current BookId*@
+<input type="hidden" id="hiddenBookId" />
+
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h3 class="modal-title">Delete Book</h3>
+            </div>
+            <div class="modal-body">
+                <h4>Are you sure you want to Remove this Book?</h4>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Cancel</a>
+                <a href="#" class="btn btn-success" onclick="DeleteEmployee()">Confirm</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section scripts{
+    <script>
+        var DownloadBook = function (bookId) {            
+
+            $.ajax({
+
+                type: "POST",
+                url: "@Url.Action("Download", "Book", new { Area = "admin" })",
+                data: { id: bookId },
+                success: function (result) {
+
+                    $("#myModal").modal("hide");
+                }
+
+            })
+
+        }
+
+        var ConfirmDelete = function (bookId) {
+
+            $("#hiddenBookId").val(bookId);
+            $("#myModal").modal('show');
+
+        }
+
+        var DeleteEmployee = function () {
+            var bookId = $("#hiddenBookId").val();
+
+            $.ajax({
+
+                type: "POST",
+                url: "@Url.Action("Delete", "Book", new { Area = "admin" })",
+                data: { id: bookId },
+                success: function (result) {
+
+                    $("#myModal").modal("hide");
+                    $("#row_" + bookId).remove();
+
+                }
+
+            })
+
+        }
+
+
+
+    </script>
+
+}

@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Library.Models.Borrower>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BookId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BorrowedFromDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BorrowedToDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ActualReturnDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IssuedBy)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BookId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BorrowedFromDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BorrowedToDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ActualReturnDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IssuedBy)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.BorrowerId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.BorrowerId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.BorrowerId })
+        </td>
+    </tr>
+}
+
+</table>
