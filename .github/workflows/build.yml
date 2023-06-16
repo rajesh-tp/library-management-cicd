@@ -6,12 +6,20 @@ jobs:
   build:
     runs-on: windows-latest
 
+    env:
+        ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
 
     - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v1.0.0
+      uses: microsoft/setup-msbuild@v1.1
+      with:
+        dotnet-version: '4.6.1'
+
+    - name: Verify msbuild installation
+      run: msbuild -version
 
     - name: Restore NuGet packages
       run: nuget restore
