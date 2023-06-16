@@ -25,4 +25,4 @@ jobs:
       run: nuget restore
 
     - name: Build app for release
-        run: msbuild D:\a\library-management-cicd\library-management-cicd\LibraryManagement\LibraryManagement.csproj -t:rebuild -verbosity:diag -property:Configuration=Release
+        run: msbuild 'D:\a\library-management-cicd\library-management-cicd\LibraryManagement\LibraryManagement.csproj' -t:rebuild -verbosity:diag -property:Configuration=Release
