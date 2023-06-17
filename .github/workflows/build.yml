@@ -37,6 +37,5 @@ jobs:
 
     - name: Publish using MSDeploy
       run: |
-        $msdeployArgs = "-verb:sync -source:contentPath='bin\Release\publish' -dest:package='$PWD\library\LibraryPackage.zip'"
-        |
+        $msdeployArgs = "-verb:sync -source:contentPath='bin\Release\publish' -dest:package='$PWD\library\LibraryPackage.zip'"       
         msdeploy $msdeployArgs
