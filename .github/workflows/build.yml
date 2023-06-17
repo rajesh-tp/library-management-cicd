@@ -30,5 +30,4 @@ jobs:
       - name: Publish using MSDeploy
       run: |
         $msdeployArgs = "-verb:sync -source:contentPath='<path-to-publish-folder>' -dest:contentPath='<msdeploy-destination-path>'"
-
         msdeploy $msdeployArgs
