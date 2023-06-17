@@ -4,27 +4,24 @@ on: [push]
 
 jobs:
   build:
-    runs-on: windows-2019
-
-    env:
-        ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+    runs-on: windows-2019    
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Install MSDeploy
-      run: choco install -y webdeploy --version=3.6.0
-
-    - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v1.1
-      with:
-        dotnet-version: '6.0.x'
-
     - name: Add MSDeploy to PATH
       run: |
         $msdeployPath = "C:\Program Files\IIS\Microsoft Web Deploy V3"  # Update with the correct path to MSDeploy
         $env:PATH += ";$msdeployPath"
+    
+    - name: Verify PATH command
+      run: path
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.1
+      with:
+        dotnet-version: '6.0.x'    
 
     - name: Verify msbuild installation
       run: msbuild -version
