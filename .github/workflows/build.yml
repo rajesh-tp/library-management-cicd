@@ -13,7 +13,7 @@ jobs:
     - name: Add MSDeploy to PATH
       run: |
         $msdeployPath = "C:\Program Files\IIS\Microsoft Web Deploy V3"  # Update with the correct path to MSDeploy
-        $env:PATH += ";$msdeployPath"
+        $env:PATH = $msdeployPath+";"+$env:PATH
     
     - name: Verify PATH command
       run: echo $env:PATH
