@@ -16,7 +16,7 @@ jobs:
         $env:PATH += ";$msdeployPath"
     
     - name: Verify PATH command
-      run: path
+      run: echo $env:PATH
 
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v1.1
