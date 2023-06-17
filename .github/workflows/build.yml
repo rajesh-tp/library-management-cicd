@@ -37,4 +37,4 @@ jobs:
 
     - name: Publish using MSDeploy
       run: |
-        msdeploy -verb:sync -source:contentPath='bin\Release\publish' -dest:package='$PWD\library\LibraryPackage.zip'        
+        msdeploy -verb:sync -source:contentPath='$PWD\LibraryManagement' -dest:package='$PWD\library\LibraryPackage.zip'        
