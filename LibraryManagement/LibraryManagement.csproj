@@ -149,7 +149,6 @@
     <Content Include="Areas\admin\Views\Book\Details.cshtml" />
     <Content Include="Areas\admin\Views\Book\Edit.cshtml" />
     <Content Include="Areas\admin\Views\Book\Delete.cshtml" />
-    <None Include="Properties\PublishProfiles\Library.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -182,6 +181,7 @@
     <Folder Include="App_Data\Books\" />
     <Folder Include="Areas\admin\Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
